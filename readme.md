@@ -40,3 +40,7 @@ To run the examples, you’ll need to follow the installation guide that we
 provide in the book’s GitHub repository. You can find this guide and the
 code examples at https://github.com/nlp-with-transformers/notebooks.
 
+## Fine tuning
+
+![](fine_tuning/fine_tuning.png)
+
