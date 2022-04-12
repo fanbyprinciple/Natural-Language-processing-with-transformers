@@ -1,12 +1,26 @@
+import cv2
 import pytesseract
-from PIL import Image, ImageEnhance, ImageFilter
+import os
+from sys import argv
 
-im = Image.open("input.png") # the second one
-im = im.filter(ImageFilter.MedianFilter())
-enhancer = ImageEnhance.Contrast(im)
-im = enhancer.enhance(2)
-im = im.convert('1')
-im.save('temp2.png')
-pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files (x86)/Tesseract-OCR/tesseract'
-text = pytesseract.image_to_string(Image.open('temp2.png'),lang="ben")
-print text
+path = './'
+dirs = os.listdir(path)
+
+print(dirs)
+
+pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract'
+
+for i in dirs:
+    image = cv2.imread(f'{path}/pages/{i}')
+    #ocr\pages\page0.png
+    text = pytesseract.image_to_string(image,lang='ben')
+    print('Writing to ' + i )
+
+    f1 = open('{path}/result/result' + i + '.txt', 'w+', encoding='UTF-8')
+
+    f1.write(text)
+    f1.close()
+
+# cv2.imshow('Image',image)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
