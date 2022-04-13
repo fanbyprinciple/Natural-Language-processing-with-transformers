@@ -1,6 +1,6 @@
 import cv2
 
-img = cv2.imread('page0.png')
+img = cv2.imread('pages/page0.png')
 mser = cv2.MSER_create()
 
 #Resize the image so that MSER can work better
@@ -26,8 +26,11 @@ vis = img.copy()
 coordinates, bboxes = mser.detectRegions(gray)
 for bbox in bboxes:
     x, y, w, h = bbox
-    cv2.rectangle(vis, (x-15, y-15), (x + w + 15, y + h+ 15), (255,255,255), -1)
-    cv2.putText(vis, 'F', (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,0), 1)
+    cv2.rectangle(vis, (x-15, y-15), (x + w + 15, y + h+ 15), (120,120,120), -1)
+
+for bbox in bboxes:
+    x, y, w, h = bbox
+    cv2.putText(vis, 'F', (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,0), 2)
 
 cv2.namedWindow('img', 0)
 cv2.namedWindow("img", cv2.WINDOW_NORMAL);
