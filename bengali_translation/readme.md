@@ -60,7 +60,7 @@ while installing tesseract remeber to add bangla model in drop down during insta
 
 ``pip install opencv-python`
 
-Then running `ocr_pytesseract.py` will work.
+Then running `ocr_pytesseract.py` will work. - some problem
 
 The result of pages are stored in ocr/result.
 
@@ -68,7 +68,18 @@ The result of pages are stored in ocr/result.
 
 https://huggingface.co/docs/transformers/installation#installing-from-source
 
-some problem with the file.
+### generating contours out of bounding boxes
+
+ocr_contours.py - need to put more effort in placing text inside blurred background.
+
+ocr_boudning_box_alt -  trying to get the contours just right.
+
+https://stackoverflow.com/questions/60977964/pytesseract-not-recognizing-text-as-expected
+
+![](bengali_ocr.gif)
+
+There is an encoding error. lets try and handle it with google trans
+
 
 
 

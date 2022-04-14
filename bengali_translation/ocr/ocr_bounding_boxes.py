@@ -1,9 +1,11 @@
 import cv2
 import pytesseract
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract'
+#pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract'
+pytesseract.pytesseract.tesseract_cmd = r'D:\\Installs\\Tesseract-OCR\\'
 
-img = cv2.imread('pages/page0.png')
+
+img = cv2.imread('page2.png')
 mser = cv2.MSER_create()
 
 #Resize the image so that MSER can work better
@@ -36,7 +38,7 @@ for bbox in bboxes:
 
 for bbox in bboxes:
     index_arr = bbox
-    cv2.putText(vis, 'O', (index_arr[0], index_arr[1]), cv2.FONT_HERSHEY_SIMPLEX, 10, (0,0,0), 2)
+    cv2.putText(vis, 'O', (index_arr[0], index_arr[1]), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,0), 2)
 
 cv2.namedWindow('img', 0)
 cv2.namedWindow("img", cv2.WINDOW_NORMAL);
