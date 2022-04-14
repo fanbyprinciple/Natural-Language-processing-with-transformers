@@ -5,6 +5,9 @@ import pytesseract
 from PIL import Image, ImageEnhance, ImageFilter
 import numpy as np
 
+from googletrans import Translator
+
+translator = Translator()
 
 # Mention the installed location of Tesseract-OCR in your system
 pytesseract.pytesseract.tesseract_cmd = 'D:\\Installs\\Tesseract-OCR\\tesseract.exe'
@@ -48,12 +51,20 @@ file.close()
 # to pytesseract for extracting text from it
 # Extracted text is then written into the text file
 counter = 0
+
 for cnt in contours_1:
 
     x, y, w, h = cv2.boundingRect(cnt)
      
     # Drawing a rectangle on copied image
-    rect = cv2.rectangle(im2, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    rect = cv2.rectangle(im2, (x, y), (x + w, y + h), (0, 255, 0), -1)
+
+for cnt in contours_1:
+
+    x, y, w, h = cv2.boundingRect(cnt)
+     
+    # Drawing a rectangle on copied image
+    #rect = cv2.rectangle(im2, (x, y), (x + w, y + h), (0, 255, 0), -1)
      
     # Cropping the text block for giving input to OCR
     cropped = im2[y:y + h, x:x + w]
@@ -75,23 +86,32 @@ for cnt in contours_1:
     im = enhancer.enhance(2)
     im = im.convert('1')
     im.save(f'p{counter}.jpg')
-    text = pytesseract.image_to_string(Image.open(f'p{counter}.jpg'))
-     
-    # Open the file in append mode
-    file = open("recognized.txt", "a", encoding='utf-8')
-     
-    # Apply OCR on the cropped image
-    text = pytesseract.image_to_string(cropped, lang='ben')
-     
-    #print(text)
-    # Appending the text into file
+    custom_config = r'--oem 3 --psm 9 -l ben'
+    text = pytesseract.image_to_string(Image.open(f'p{counter}.jpg'), config=custom_config)
 
-    cv2.putText(im2, text, (x, y+10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,0), 2)
+    # try:
+    #     print(translator.detect(str(text)))
+    # except Exception as e:
+    #     print(e)
 
-    file.write(text)
+    print(text)
+    if(len(text)>0):
+        try: 
+            text1 = str(translator.translate(str(text), src='bn', dst='en'))
+        except Exception as e:
+            text1 = '<redacted>'
+        # Open the file in append mode
+        file = open("recognized.txt", "a", encoding='utf-8')
      
-    # Close the file
-    file.close()
+        #print(text)
+        # Appending the text into file
+
+        cv2.putText(im2, text1, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,0), 2)
+
+        file.write(text1)
+     
+         # Close the file
+        file.close()
 
     counter += 1
 
