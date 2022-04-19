@@ -54,6 +54,13 @@ pip install pillow
 greetings!! you are done!! :)0
 ```
 
+
+### installing in ubunutu
+
+https://medium.com/@ahmedbr/how-to-implement-pytesseract-properly-d6e2c2bc6dda
+
+`sudo apt-get install tesseract-ocr-ben`
+
 while installing tesseract remeber to add bangla model in drop down during installation.
 
 2. Installing open cv
@@ -72,7 +79,7 @@ https://huggingface.co/docs/transformers/installation#installing-from-source
 
 ocr_contours.py - need to put more effort in placing text inside blurred background.
 
-ocr_boudning_box_alt -  trying to get the contours just right.
+ocr_bounding_box_alt -  trying to get the contours just right.
 
 https://stackoverflow.com/questions/60977964/pytesseract-not-recognizing-text-as-expected
 
